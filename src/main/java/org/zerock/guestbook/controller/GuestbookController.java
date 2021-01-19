@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.guestbook.dto.GuestbookDTO;
 import org.zerock.guestbook.dto.PageRequestDTO;
+import org.zerock.guestbook.dto.PageResultDTO;
+import org.zerock.guestbook.entity.Guestbook;
 import org.zerock.guestbook.service.GuestbookService;
 
 @Controller
@@ -25,6 +28,8 @@ public class GuestbookController {
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model){
         log.info("list..........",pageRequestDTO);
+        PageResultDTO<GuestbookDTO, Guestbook> temp = service.getList(pageRequestDTO);
+        System.out.println(temp);
         model.addAttribute("result",service.getList(pageRequestDTO));
     }
 
